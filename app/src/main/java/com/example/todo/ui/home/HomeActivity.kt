@@ -9,20 +9,17 @@ import com.example.todo.ui.home.settings.SettingsFragment
 import com.example.todo.ui.home.tasksList.TasksFragment
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
+    var tasksFragment: TasksFragment? = null
     override fun getLayoutId(): Int = R.layout.activity_home
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.bottomNavigation.setOnItemSelectedListener { item ->
-            binding.bottomNavigation.selectedItemId = R.id.tasks_navigation
-            binding.fabAddTask.setOnClickListener {
-                showAddTaskBottomSheet()
-                val addTaskSheet = AddTaskBottomSheet()
-                addTaskSheet.show(supportFragmentManager, "")
-            }
+
             when (item.itemId) {
                 R.id.tasks_navigation -> {
-                    showFragment(TasksFragment())
+                    tasksFragment = TasksFragment()
+                    showFragment(tasksFragment!!)
                 }
 
                 R.id.settings_navigation -> {
@@ -31,11 +28,22 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             }
             return@setOnItemSelectedListener true
         }
+        binding.bottomNavigation.selectedItemId = R.id.tasks_navigation
+        binding.fabAddTask.setOnClickListener {
+            showAddTaskBottomSheet()
+
+        }
 
 
     }
 
     private fun showAddTaskBottomSheet() {
+        val addTaskSheet = AddTaskBottomSheet()
+        addTaskSheet.tasKAddedListener = AddTaskBottomSheet.OnTasKAddedListener {
+            tasksFragment?.getTasksFromDatabase()
+
+        }
+        addTaskSheet.show(supportFragmentManager, "")
     }
 
     private fun showFragment(fragment: Fragment) {

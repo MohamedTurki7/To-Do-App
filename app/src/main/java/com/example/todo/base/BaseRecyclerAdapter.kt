@@ -17,6 +17,14 @@ abstract class BaseRecyclerAdapter<AppViewHolder : ViewHolder, T>() :
         items!!.add(newItem)
         notifyItemInserted(items!!.size)
     }
+//    fun remove(task: Task, position: Int) {
+//        this.items!!.remove(task)
+//        notifyItemRemoved(position)
+//    }fun update(task: Task, position: Int) {
+//        this.items!!.set(task)
+//        notifyDataSetChanged()
+//
+//    }
 
     open class AppViewHolder(val viewBinding: ViewBinding) : ViewHolder(viewBinding.root) {
         fun <VB : ViewBinding> getBinding(): VB {

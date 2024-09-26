@@ -72,4 +72,9 @@ dependencies {
     //calendar
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
 
+    def core_version = "1.13.1"
+
+    implementation("androidx.core:core-ktx:$core_version")
+
+
 }

@@ -1,24 +1,27 @@
 package com.example.todo.database.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity
 data class Task(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo
     val id: Int = 0,
     @ColumnInfo
-    val title: String? = null,
+    var title: String? = null,
     @ColumnInfo
-    val description: String? = null,
+    var description: String? = null,
     @ColumnInfo(index = true)
-    val date: Long? = null,
+    var date: Long? = null,
     @ColumnInfo
-    val time: Long? = null,
+    var time: Long? = null,
     @ColumnInfo
-    val status: Boolean = false
+    var status: Boolean = false,
 
 
-)
+    ) : Parcelable

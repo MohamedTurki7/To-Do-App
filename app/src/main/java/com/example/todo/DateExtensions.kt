@@ -37,4 +37,21 @@ fun Calendar.timeFormatOnly(): String {
     val dateFormat = SimpleDateFormat("HH:mm a ", Locale.ENGLISH)
     return dateFormat.format(time)
 }
+fun Long.timeFormatOnly(): String {
+    val dateFormat = SimpleDateFormat("HH:mm a ", Locale.ENGLISH)
+    return dateFormat.format(this)
+}
+
+fun getHourInAmPm(hour: Int): String {
+    return if (hour < 12) "AM" else "PM"
+}
+
+fun getHour12(hour: Int): Int {
+    return if (hour > 12) hour - 12 else if (hour == 0) 12 else hour
+}
+
+fun getFormattedTime(hour: Int, minute: Int): String {
+    val minuteString = if (minute == 0) "00" else minute.toString()
+    return "${getHour12(hour)}:${minuteString} ${getHourInAmPm(hour)}"
+}
 
